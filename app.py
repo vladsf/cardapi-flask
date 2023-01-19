@@ -17,6 +17,12 @@ issuer_category = {
     '9': "For assignment by national standards bodies",
 }
 
+@app.route('/')
+def service_status():
+    return {
+        "service_status": "OK",
+    }
+
 @app.route('/cardnumber/validate/<string:card_number>')
 def validate_cardnumber(card_number):
     if card_number.isnumeric():
