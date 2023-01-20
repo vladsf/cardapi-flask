@@ -45,7 +45,7 @@ def validate_cardnumber(card_number):
     else:
         return {
             "card_number": card_number,
-            "result": False,
+            "is_valid": False,
             "error": "Not a card number",
         }
 
