@@ -14,6 +14,11 @@ issuing_network = {
     "Troy"            : ["65", "9792"],
     "Discover Card"   : ['6011'] + list(map(str, range(644, 649+1))) + ["65"],
     "Diners Club International": ["36"],
+    "RuPay"           : ['60', '65', '81', '82', '508'],
+    "RuPay-JCB"       : ['353', '356'],
+    "Verve"           : (list(map(str, range(506099, 506198+1)))
+                        + list(map(str, range(650002, 650027+1)))
+                        + list(map(str, range(507865, 507964+1))) ),
     }
 
 issuer_category = {
@@ -66,6 +71,8 @@ def get_issuing_network(card_number):
         elif card_number[0:3] in issuing_network[network]:
             return network
         elif card_number[0:4] in issuing_network[network]:
+            return network
+        elif card_number[0:6] in issuing_network[network]:
             return network
     
     return "Other"
