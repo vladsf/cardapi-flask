@@ -3,22 +3,14 @@ app = Flask(__name__)
 
 """ https://en.wikipedia.org/wiki/Payment_card_number """
 issuing_network = {
-    '2200': "Mir",
-    '2201': "Mir",
-    '2202': "Mir",
-    '2203': "Mir",
-    '2204': "Mir",
-    '34'  : "American Express",
-    '37'  : "American Express",
-    '4'   : "Visa",
-    '51'  : "Mastercard",
-    '52'  : "Mastercard",
-    '53'  : "Mastercard",
-    '54'  : "Mastercard",
-    '55'  : "Mastercard",
-    '62'  : "China UnionPay",
-    '8600': "UzCard",
-    '9860': "Humo",
+    "Mir"             : list(map(str, range(2200,2204+1))),
+    "American Express": ['34', '37'],
+    "Visa"            : ['4'],
+    "Mastercard"      : list(map(str, range(51,55+1))),
+    "China UnionPay"  : ["62"],
+    "UzCard"          : ["8600"],
+    "Humo"            : ["9860"],
+    "Troy" 	          : ["65", "9792"],
     }
 
 issuer_category = {
@@ -63,14 +55,15 @@ def generate_cardnumber():
     }
 
 def get_issuing_network(card_number):
-    if card_number[0] in issuing_network:
-        return issuing_network[card_number[0]]
-    elif card_number[0:2] in issuing_network:
-        return issuing_network[card_number[0:2]]
-    elif card_number[0:4] in issuing_network:
-        return issuing_network[card_number[0:4]]
-    else:
-        return "Other"
+    for network in issuing_network:
+        if card_number[0] in issuing_network[network]:
+            return network
+        elif card_number[0:2] in issuing_network[network]:
+            return network
+        elif card_number[0:4] in issuing_network[network]:
+            return network
+    
+    return "Other"
 
 """ The first (leading) digit of the IIN identifies the major industry of the card issuer. """
 def get_issuer_category(card_number):
