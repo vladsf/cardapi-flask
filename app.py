@@ -11,7 +11,9 @@ issuing_network = {
     "China UnionPay"  : ["62"],
     "UzCard"          : ["8600"],
     "Humo"            : ["9860"],
-    "Troy" 	          : ["65", "9792"],
+    "Troy"            : ["65", "9792"],
+    "Discover Card"   : ['6011'] + list(map(str, range(644, 649+1))) + ["65"],
+    "Diners Club International": ["36"],
     }
 
 issuer_category = {
@@ -60,6 +62,8 @@ def get_issuing_network(card_number):
         if card_number[0] in issuing_network[network]:
             return network
         elif card_number[0:2] in issuing_network[network]:
+            return network
+        elif card_number[0:3] in issuing_network[network]:
             return network
         elif card_number[0:4] in issuing_network[network]:
             return network
