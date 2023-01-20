@@ -1,3 +1,4 @@
+import os
 from flask import Flask
 app = Flask(__name__)
 
@@ -61,6 +62,10 @@ def generate_cardnumber():
     return {
         "card_number": "9792087730395886",
     }
+
+@app.route('/cardnumber/gettestapikey/')
+def get_test_api_key():
+    return { "test_api_key": os.environ.get('TEST_API_KEY') }
 
 def get_issuing_network(card_number):
     for network in issuing_network:
