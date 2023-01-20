@@ -3,10 +3,11 @@ app = Flask(__name__)
 
 """ https://en.wikipedia.org/wiki/Payment_card_number """
 issuing_network = {
-    "Mir"             : list(map(str, range(2200,2204+1))),
+    "Mir"             : list(map(str, range(2200, 2204+1))),
     "American Express": ['34', '37'],
     "Visa"            : ['4'],
-    "Mastercard"      : list(map(str, range(51,55+1))),
+    "Mastercard"      : list(map(str, range(51, 55+1))),
+    "JCB"             : list(map(str, range(3528, 3589+1))),
     "China UnionPay"  : ["62"],
     "UzCard"          : ["8600"],
     "Humo"            : ["9860"],
