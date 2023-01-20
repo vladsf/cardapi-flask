@@ -2,7 +2,16 @@ from flask import Flask
 app = Flask(__name__)
 
 """ https://en.wikipedia.org/wiki/Payment_card_number """
-issuing_network = {}
+issuing_network = {
+    '4' : "Visa",
+    '34': "American Express",
+    '37': "American Express",
+    '51': "Mastercard",
+    '52': "Mastercard",
+    '53': "Mastercard",
+    '54': "Mastercard",
+    '55': "Mastercard",
+    }
 
 issuer_category = {
     '0': "ISO/TC 68 and other industry assignments",
@@ -15,7 +24,7 @@ issuer_category = {
     '7': "Petroleum and other future industry assignments",
     '8': "Healthcare, telecommunications and other future industry assignments",
     '9': "For assignment by national standards bodies",
-}
+    }
 
 @app.route('/')
 def service_status():
@@ -46,7 +55,12 @@ def generate_cardnumber():
     }
 
 def get_issuing_network(card_number):
-    return "Other"
+    if card_number[0] in issuing_network:
+        return issuing_network[card_number[0]]
+    elif card_number[0:2] in issuing_network:
+        return issuing_network[card_number[0:2]]
+    else:
+        return "Other"
 
 """ The first (leading) digit of the IIN identifies the major industry of the card issuer. """
 def get_issuer_category(card_number):
